@@ -1,7 +1,6 @@
 # -*- coding:utf-8 -*-
 import pandas as pd
-import json
-import ast
+import re
 
 
 def json2pandases(file):
@@ -9,6 +8,6 @@ def json2pandases(file):
     with open(file, 'r') as f:
         line = f.readline()
         while line:
-            js = json.dumps(line)
-            dt = ast.literal_eval(js)
-    return df
+            data = eval(line)
+            yield data
+        df = df.append(data)
